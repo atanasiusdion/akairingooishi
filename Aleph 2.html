@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atanasius Dion Andhita Putra - Portfolio</title>
+    
+    <!-- Link Font Awesome untuk menampilkan Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Link Google Fonts untuk Open Sans (Isi) & Syncopate (Cadangan Akira) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* === PENGATURAN FONT AKIRA === */
+        /* Pastikan kamu memiliki file bernama 'Akira.otf' di folder yang sama */
+        @font-face {
+            font-family: 'Akira';
+            src: url('Akira.otf') format('opentype');
+        }
+
+        /* Gaya Dasar, Reset & Smooth Scrolling */
+        html {
+            scroll-behavior: smooth; 
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* Font dasar untuk seluruh isi web diubah ke Open Sans */
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        /* Font khusus untuk Judul menggunakan Akira (atau Syncopate sebagai cadangan) */
+        h1, h2, h3, nav a {
+            font-family: 'Akira', 'Syncopate', sans-serif;
+            text-transform: uppercase;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+        }
+
+        /* Navigasi */
+        header {
+            background-color: #33080c; 
+            color: white;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        nav {
+            max-width: 1000px;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 0.8rem; /* Sedikit dikecilkan karena font Akira sangat lebar */
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ff9e9e; 
+        }
+
+        /* Container Umum */
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 80px 20px;
+        }
+
+        h2.section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+            color: #33080c; 
+        }
+
+        /* 1. Hero Section */
+        #hero {
+            background-color: #fff;
+            text-align: center;
+            padding: 100px 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 1.2s ease-in-out; 
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #33080c;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        #hero h1 {
+            font-size: 2.2rem; /* Disesuaikan agar Akira tidak terlalu raksasa */
+            margin-bottom: 15px;
+            color: #33080c; 
+            letter-spacing: 1px;
+        }
+
+        #hero p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            font-weight: 400;
+        }
+
+        /* 2. Projects Section */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px; 
+        }
+
+        @media (max-width: 850px) {
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .project-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border-bottom: 4px solid #33080c; 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px); 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .project-media-wrapper {
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-media {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            object-position: center;
+            display: block;
+        }
+
+        /* Trik khusus me-nge-zoom video untuk memotong black bar yang menyatu dengan file MP4 */
+        video.project-media {
+            transform: scale(1.35); /* Angka ini akan me-zoom video 35%. Ubah jadi 1.2 atau 1.4 jika masih kurang pas */
+            transform-origin: center;
+        }
+
+        .project-info {
+            padding: 25px;
+        }
+
+        .project-info h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: #33080c; 
+            line-height: 1.4;
+        }
+
+        .project-info p {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        /* 3. Skills & Tools Section */
+        #skills {
+            background-color: #fff;
+        }
+
+        .skills-list {
+            list-style: none;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .skills-list li {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            font-size: 1.1rem;
+            transition: background 0.3s ease;
+        }
+
+        .skills-list li:hover {
+            background-color: #fcfcfc;
+        }
+
+        .skills-list li strong {
+            display: inline-block;
+            width: 250px;
+            color: #33080c; 
+        }
+
+        /* 4. About Me Section */
+        #about p {
+            text-align: center;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: auto;
+            color: #444;
+            line-height: 1.8;
+        }
+
+        /* 5. Experience Section */
+        #experience {
+            background-color: #fff;
+        }
+
+        .experience-list {
+            list-style: none;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .experience-list li {
+            background: #f9f9f9;
+            margin-bottom: 15px;
+            padding: 20px;
+            border-left: 4px solid #33080c; 
+            font-size: 1.1rem;
+            transition: transform 0.2s ease;
+        }
+
+        .experience-list li:hover {
+            transform: translateX(5px); 
+        }
+
+        /* 6. Contact Section */
+        #contact {
+            text-align: center;
+            background-color: #33080c; 
+            color: white;
+            padding: 100px 20px;
+        }
+
+        #contact h2.section-title {
+            color: white;
+        }
+
+        .icon-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px; 
+            margin-top: 20px;
+        }
+
+        .icon-container a {
+            color: white;
+            font-size: 3rem; 
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .icon-container a:hover {
+            color: #ff9e9e;
+            transform: translateY(-5px) scale(1.1); 
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1f0406; 
+            color: #777;
+            font-size: 0.9rem;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        /* Animasi Keyframes */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigasi -->
+    <header>
+        <nav>
+            <a href="#hero">Home</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#about">About Me</a>
+            <a href="#experience">Experience</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- 1. Hero Section -->
+    <section id="hero">
+        <div class="container hero-content">
+            <img src="evie.jpg" alt="Atanasius Dion" class="profile-img">
+            <h1>Atanasius Dion Andhita Putra</h1>
+            <p>Architecture Student at Universitas Gadjah Mada | Observing, learning, and designing the future of Indonesian architecture.</p>
+        </div>
+    </section>
+
+    <!-- 2. Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <div class="project-grid">
+                
+                <!-- Proyek 1: Gambar -->
+                <div class="project-card">
+                    <div class="project-media-wrapper">
+                        <img src="9.jpeg" alt="Architecture Studio" class="project-media">
+                    </div>
+                    <div class="project-info">
+                        <h3>Architecture Studio Final Project</h3>
+                        <p>An exploration of basic forms and spatial organization.</p>
+                    </div>
+                </div>
+
+                <!-- Proyek 2: Video Animasi D5 Render -->
+                <div class="project-card">
+                    <div class="project-media-wrapper">
+                        <video src="SF26 Behhh.mp4" autoplay loop muted playsinline class="project-media"></video>
+                    </div>
+                    <div class="project-info">
+                        <h3>Digital Architecture Final Project</h3>
+                        <p>The application of computational and digital modeling in architectural design, utilizing a combination of 2D and 3D software.</p>
+                    </div>
+                </div>
+
+                <!-- Proyek 3: Gambar -->
+                <div class="project-card">
+                    <div class="project-media-wrapper">
+                        <img src="7.jpeg" alt="Poster Design" class="project-media">
+                    </div>
+                    <div class="project-info">
+                        <h3>Digital Architecture Poster Design</h3>
+                        <p>An exploration of visual communication and architectural graphics to convey design ideas effectively and aesthetically.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Skills & Tools Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Skills & Tools</h2>
+            <ul class="skills-list">
+                <li><strong>2D & 3D Modeling:</strong> Rhinoceros (Rhino)</li>
+                <li><strong>Visualization & Rendering:</strong> D5 Render</li>
+                <li><strong>Graphic Design & Presentation:</strong> Affinity Suite, Canva</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 4. About Me Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <p>I am an Architecture student at Universitas Gadjah Mada, passionate about how space, structure, and aesthetics shape daily life. I am currently focused on developing my design skills and am open to new experiences in the field of architecture.</p>
+        </div>
+    </section>
+
+    <!-- 5. Experience Section -->
+    <section id="experience">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <ul class="experience-list">
+                <li><strong>Staff</strong> – Wiswakharman Expo (WEX) UGM</li>
+                <li><strong>Active Member</strong> – Architecture Student Association (Keluarga Mahasiswa Teknik Arsitektur / KMTA) UGM</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 6. Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="icon-container">
+                <a href="https://discord.gg/zUCAahfqDE" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a>
+                <a href="https://www.instagram.com/atanasiusdionn/" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="mailto:atanasiusdion@gmail.com" title="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Atanasius Dion Andhita Putra. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
